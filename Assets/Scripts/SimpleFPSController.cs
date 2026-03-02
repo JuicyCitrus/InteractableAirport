@@ -1,0 +1,146 @@
+using UnityEngine;
+
+[RequireComponent(typeof(Rigidbody))]
+public class SimpleFPSController : MonoBehaviour
+{
+    [Header("Movement")]
+    public float moveSpeed = 6f;
+    public float acceleration = 20f;
+    public float airControl = 0.3f;
+    public float jumpForce = 5f;
+
+    [Header("Mouse Look")]
+    public float mouseSensitivity = 0.1f;
+    public float maxLookAngle = 80f;
+
+    [Header("Ground Check")]
+    public float groundCheckDistance = 1f;
+    public LayerMask groundMask;
+
+    private Rigidbody rb;
+    private Camera cam;
+
+    private float xRotation;
+    private bool isGrounded;
+
+    private Vector2 moveInput;
+    private Vector2 lookInput;
+
+    private Controls playerControls;
+
+    private void Awake()
+    {
+        rb = GetComponent<Rigidbody>();
+        cam = GetComponentInChildren<Camera>();
+
+        playerControls = new Controls();
+    }
+
+    private void OnEnable()
+    {
+        playerControls.Enable();
+
+        playerControls.Player.Move.performed += OnMove;
+        playerControls.Player.Move.canceled += OnMove;
+
+        playerControls.Player.Look.performed += OnLook;
+        playerControls.Player.Look.canceled += OnLook;
+
+        playerControls.Player.Jump.started += ctx => HandleJump();
+    }
+
+    private void OnDisable()
+    {
+        playerControls.Player.Move.performed -= OnMove;
+        playerControls.Player.Move.canceled -= OnMove;
+
+        playerControls.Player.Look.performed -= OnLook;
+        playerControls.Player.Look.canceled -= OnLook;
+
+        playerControls.Disable();
+    }
+
+    private void Start()
+    {
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
+    }
+
+    private void Update()
+    {
+        HandleMouseLook();
+    }
+
+    private void FixedUpdate()
+    {
+        CheckGround();
+        HandleMovement();
+    }
+
+    // =========================
+    // INPUT CALLBACKS
+    // =========================
+
+    private void OnMove(UnityEngine.InputSystem.InputAction.CallbackContext ctx)
+    {
+        moveInput = ctx.ReadValue<Vector2>();
+    }
+
+    private void OnLook(UnityEngine.InputSystem.InputAction.CallbackContext ctx)
+    {
+        lookInput = ctx.ReadValue<Vector2>();
+    }
+
+    // =========================
+    // LOOK
+    // =========================
+
+    private void HandleMouseLook()
+    {
+        float mouseX = lookInput.x * mouseSensitivity;
+        float mouseY = lookInput.y * mouseSensitivity;
+
+        xRotation -= mouseY;
+        xRotation = Mathf.Clamp(xRotation, -maxLookAngle, maxLookAngle);
+
+        cam.transform.localRotation = Quaternion.Euler(xRotation, 0f, 0f);
+        transform.Rotate(Vector3.up * mouseX);
+    }
+
+    // =========================
+    // MOVEMENT
+    // =========================
+
+    private void HandleMovement()
+    {
+        Vector3 moveDir = transform.right * moveInput.x + transform.forward * moveInput.y;
+        moveDir.Normalize();
+
+        Vector3 targetVelocity = moveDir * moveSpeed;
+
+        Vector3 velocity = rb.linearVelocity;
+        Vector3 velocityChange = targetVelocity - new Vector3(velocity.x, 0f, velocity.z);
+
+        float control = isGrounded ? 1f : airControl;
+        velocityChange *= control;
+
+        rb.AddForce(velocityChange * acceleration, ForceMode.Acceleration);
+    }
+
+    private void HandleJump()
+    {
+        if (!isGrounded) return;
+
+        rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
+    }
+
+    // =========================
+    // GROUND CHECK
+    // =========================
+
+    private void CheckGround()
+    {
+        Ray ray = new Ray(transform.position, Vector3.down);
+        isGrounded = Physics.Raycast(ray, groundCheckDistance + 0.1f, groundMask);
+    }
+}
