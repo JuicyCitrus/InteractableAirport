@@ -8,5 +8,11 @@ public class ApprovedTrigger : MonoBehaviour
         {
             luggage.StopAllCoroutines();
         }
+
+        // End round if it's the last bag
+        if(SecurityScoring.Instance.luggagesCleared >= SecurityScoring.Instance.luggageInRound)
+        {
+            SecurityScoring.Instance.RoundOver();
+        }
     }
 }

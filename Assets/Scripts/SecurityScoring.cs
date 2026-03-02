@@ -7,6 +7,7 @@ public class SecurityScoring : MonoBehaviour
 
     [Header("Scoring Settings")]
     public int luggageInRound = 10;
+    public int luggagesCleared = 0;
     public int successfulIdentifications;
     public int failedIdentifications;
 
@@ -32,5 +33,11 @@ public class SecurityScoring : MonoBehaviour
         roundOverScreen.SetActive(true);
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
+
+        // Display the score for the round
+        scoreText.text = $"Successful Identifications: {successfulIdentifications}\nFailed Identifications: {failedIdentifications}";
+
+        // Freeze time
+        Time.timeScale = 0f;
     }
 }

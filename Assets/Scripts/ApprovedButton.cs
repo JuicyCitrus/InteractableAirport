@@ -28,5 +28,8 @@ public class ApprovedButton : WorldSpaceButton
 
         // Spawn the next bag
         LuggageSpawner.Instance.SpawnLuggage();
+
+        // Increment luggages cleared
+        SecurityScoring.Instance.luggagesCleared++;
     }
 }
