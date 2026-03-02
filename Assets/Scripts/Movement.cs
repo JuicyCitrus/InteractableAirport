@@ -12,10 +12,6 @@ public class Movement : MonoBehaviour
     public float mouseSensitivity = 100f;
     public Transform cameraPivot;
 
-    [Header("Interaction")]
-    public Transform raycastOrigin;
-    public float interactionRange;
-
     private Controls controls;
     private float xRotation = 0f;
     private WorldSpaceButton currentButton;
@@ -35,7 +31,6 @@ public class Movement : MonoBehaviour
     {
         HandleMouseLook();
         HandleMovement();
-        RaycastForward();
     }
 
     private void HandleMouseLook()
@@ -59,32 +54,5 @@ public class Movement : MonoBehaviour
 
         Vector3 move = transform.right * x + transform.forward * z;
         controller.Move(move * moveSpeed * Time.deltaTime);
-    }
-
-    private void RaycastForward()
-    {
-        Ray ray = new Ray(raycastOrigin.position, raycastOrigin.transform.forward);
-        RaycastHit hit;
-        Debug.DrawRay(ray.origin, ray.direction * interactionRange, Color.red);
-
-        // Button Interaction
-        if (Physics.Raycast(ray, out hit, interactionRange))
-        {
-            if(hit.transform.TryGetComponent<WorldSpaceButton>(out WorldSpaceButton button))
-            {
-                if (currentButton != button)
-                {
-                    currentButton = button;
-                }
-                if (controls.Player.Interact.WasPressedThisFrame())
-                {
-                    currentButton.Push();
-                }
-            }
-        }
-        else
-        {
-            currentButton = null;
-        }
     }
 }
