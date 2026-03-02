@@ -14,7 +14,6 @@ public class Movement : MonoBehaviour
 
     private Controls controls;
     private float xRotation = 0f;
-    private WorldSpaceButton currentButton;
 
     private void Awake()
     {

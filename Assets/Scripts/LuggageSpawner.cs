@@ -9,6 +9,8 @@ public class LuggageSpawner : MonoBehaviour
 
     public Vector3 spawnPosition;
 
+    private int luggagesSpawned = 0;
+
     private void Awake()
     {
         if (Instance != null && Instance != this)
@@ -28,10 +30,19 @@ public class LuggageSpawner : MonoBehaviour
 
     public void SpawnLuggage()
     {
+        // Don't spawn anymore luggage once the per round limit has been reached
+        if(luggagesSpawned >= SecurityScoring.Instance.luggageInRound)
+        {
+            return;
+        }
+
         // Choose a rabndom luggage prefab from the list
         int randomIndex = Random.Range(0, luggagePrefabs.Count);
 
         // Spawn it at the spawn position
         Instantiate(luggagePrefabs[randomIndex], spawnPosition, this.transform.rotation);
+
+        // Keep track of how much luggage has been spawned so we know when to stop
+        luggagesSpawned++;
     }
 }

@@ -104,7 +104,7 @@ GameObject:
   - component: {fileID: 5594335280600175905}
   m_Layer: 0
   m_Name: Luggage
-  m_TagString: Untagged
+  m_TagString: Luggage
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -140,6 +140,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::SecurityLuggage
   xRayImage: {fileID: -2113912392, guid: 307f77113a3659048bd3171bd07d7fd8, type: 3}
   hasContraband: 0
+  markedAsContraband: 0
   isInXRayMachine: 0
   rb: {fileID: 6932872334159376173}
 --- !u!54 &6932872334159376173

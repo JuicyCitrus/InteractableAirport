@@ -4,11 +4,17 @@ using UnityEngine.UI;
 
 public class SecurityLuggage : MonoBehaviour
 {
+    [Header("Luggage Info")]
     public Sprite xRayImage;
     public bool hasContraband;
+
+    [Header("State")]
     public bool markedAsContraband = false;
     public bool isInXRayMachine = false;
+
+    [Header("Movement")]
     public Rigidbody rb;
+    public float movementSpeed = 5f;
 
     private void OnEnable()
     {
@@ -30,7 +36,7 @@ public class SecurityLuggage : MonoBehaviour
     {
         while(!isInXRayMachine)
         {
-            rb.MovePosition(transform.position + transform.forward * Time.deltaTime);
+            rb.MovePosition(transform.position + transform.forward * movementSpeed * Time.deltaTime);
             yield return null;
         }
     }
