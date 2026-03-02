@@ -1,32 +1,49 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class WorldSpaceButton : MonoBehaviour
 {
     public Vector3 pushedPosition;
+    public float pushDuration = 0.2f;
+
+    private Vector3 originalPosition;
+    private bool isPushing = false;
+
+    private void Start()
+    {
+        originalPosition = transform.localPosition;
+    }
 
     public virtual void Push()
     {
+        if(isPushing) 
+            return;
+
         StartCoroutine(PushCoroutine());
     }
 
     private IEnumerator PushCoroutine()
     {
-        // Get the original position for returning after the push
-        Vector3 originalPosition = transform.position;
+        isPushing = true;
+        float elapsedTime = 0f;
 
-        // Move towards the pushed position
-        while (Vector3.Distance(transform.position, pushedPosition) > 0.01f)
+        while (elapsedTime < pushDuration)
         {
-            transform.position = Vector3.MoveTowards(transform.position, pushedPosition, Time.deltaTime * 5f);
+            transform.localPosition = Vector3.Lerp(originalPosition, pushedPosition, elapsedTime / pushDuration);
+            elapsedTime += Time.deltaTime;
             yield return null;
         }
 
-        // Move back to the original position
-        while (Vector3.Distance(transform.position, originalPosition) > 0.01f)
+        elapsedTime = 0f;
+
+        while (elapsedTime < pushDuration)
         {
-            transform.position = Vector3.MoveTowards(transform.position, originalPosition, Time.deltaTime * 5f);
+            transform.localPosition = Vector3.Lerp(pushedPosition, originalPosition, elapsedTime / pushDuration);
+            elapsedTime += Time.deltaTime;
             yield return null;
         }
+
+        isPushing = false;
     }
 }

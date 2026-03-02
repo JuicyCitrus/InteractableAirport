@@ -6,6 +6,7 @@ public class SecurityLuggage : MonoBehaviour
 {
     public Sprite xRayImage;
     public bool hasContraband;
+    public bool markedAsContraband = false;
     public bool isInXRayMachine = false;
     public Rigidbody rb;
 
@@ -19,7 +20,13 @@ public class SecurityLuggage : MonoBehaviour
         StopAllCoroutines();
     }
 
-    private IEnumerator MoveForward()
+    public void ContinueMoving()
+    {
+        isInXRayMachine = false;
+        StartCoroutine(MoveForward());
+    }
+
+    public IEnumerator MoveForward()
     {
         while(!isInXRayMachine)
         {

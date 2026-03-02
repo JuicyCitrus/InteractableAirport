@@ -63,7 +63,7 @@ public class Movement : MonoBehaviour
 
     private void RaycastForward()
     {
-        Ray ray = new Ray(raycastOrigin.position, transform.forward);
+        Ray ray = new Ray(raycastOrigin.position, raycastOrigin.transform.forward);
         RaycastHit hit;
         Debug.DrawRay(ray.origin, ray.direction * interactionRange, Color.red);
 
