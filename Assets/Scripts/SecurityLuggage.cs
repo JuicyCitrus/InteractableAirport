@@ -7,6 +7,7 @@ public class SecurityLuggage : MonoBehaviour
     [Header("Luggage Info")]
     public Sprite xRayImage;
     public bool hasContraband;
+    public int luggageID;
 
     [Header("State")]
     public bool markedAsContraband = false;
@@ -15,6 +16,7 @@ public class SecurityLuggage : MonoBehaviour
     [Header("Movement")]
     public Rigidbody rb;
     public float movementSpeed = 5f;
+    public float distanceForSecondMove = 10;
 
     private void OnEnable()
     {

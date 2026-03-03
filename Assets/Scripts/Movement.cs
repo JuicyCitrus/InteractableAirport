@@ -26,6 +26,11 @@ public class Movement : MonoBehaviour
         Cursor.visible = false;
     }
 
+    private void OnDisable()
+    {
+        controls.Disable();
+    }
+
     private void Update()
     {
         HandleMouseLook();

@@ -68,7 +68,7 @@ public class InteractionManager : MonoBehaviour
                 {
                     luggage.gameObject.transform.SetParent(itemHoldArea);
                     luggage.gameObject.transform.localPosition = Vector3.zero;
-                    luggage.gameObject.transform.localRotation = Quaternion.identity;
+                    luggage.gameObject.transform.localRotation = Quaternion.Euler(0, 90, 0);
                     luggage.rb.useGravity = false;
                     luggage.rb.isKinematic = true;
 

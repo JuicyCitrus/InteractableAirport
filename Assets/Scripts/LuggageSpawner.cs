@@ -31,7 +31,7 @@ public class LuggageSpawner : MonoBehaviour
     public void SpawnLuggage()
     {
         // Don't spawn anymore luggage once the per round limit has been reached
-        if(SecurityScoring.Instance.luggagesCleared >= SecurityScoring.Instance.luggageInRound)
+        if(luggagesSpawned >= SecurityScoring.Instance.luggageInRound)
         {
             return;
         }
@@ -40,6 +40,8 @@ public class LuggageSpawner : MonoBehaviour
         int randomIndex = Random.Range(0, luggagePrefabs.Count);
 
         // Spawn it at the spawn position
-        Instantiate(luggagePrefabs[randomIndex], spawnPosition, this.transform.rotation);
+        GameObject luggage = Instantiate(luggagePrefabs[randomIndex], spawnPosition, this.transform.rotation);
+        luggagesSpawned++;
+        luggage.GetComponent<SecurityLuggage>().luggageID = luggagesSpawned;
     }
 }
