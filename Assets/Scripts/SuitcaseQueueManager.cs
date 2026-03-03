@@ -3,6 +3,8 @@ using UnityEngine;
 
 public class SuitcaseQueueManager : MonoBehaviour
 {
+    [SerializeField] private CargoWinLoseController winLose;
+
     [Header("Spawning")]
     [SerializeField] private List<GameObject> suitcasePrefabs = new List<GameObject>();
     [SerializeField] private int initialQueueCount = 6;
@@ -24,6 +26,7 @@ public class SuitcaseQueueManager : MonoBehaviour
     private readonly List<SuitcaseItem> queue = new List<SuitcaseItem>();
     private SuitcaseItem activeAtPickup;
 
+    public int InitialQueueCount => initialQueueCount;
     private void Awake()
     {
         if (queueRoot == null) queueRoot = transform;
@@ -31,6 +34,9 @@ public class SuitcaseQueueManager : MonoBehaviour
 
     private void Start()
     {
+        if (winLose != null)
+            winLose.SetTargetPlacements(initialQueueCount);
+
         // Fill the queue
         for (int i = 0; i < initialQueueCount; i++)
             EnqueueRandom();

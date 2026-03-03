@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -7,6 +8,13 @@ public class SuitcasePlacer : MonoBehaviour
     [SerializeField] private CargoBayGrid bayGrid;
     [SerializeField] private Camera playerCam;
     [SerializeField] private SuitcaseQueueManager queueManager;
+    [SerializeField] private CargoWinLoseController winLose;
+
+    [Header("No Valid Move UI")]
+    [Tooltip("If true, we auto-check for valid moves right after selecting a suitcase and after rotations.")]
+    [SerializeField] private bool autoCheckNoValidMoves = true;
+
+    public event Action OnNoValidMove;
 
     [Header("No-Bonk Sampling")]
     [SerializeField] private bool useRayEndSampling = true;
@@ -22,10 +30,24 @@ public class SuitcasePlacer : MonoBehaviour
     [SerializeField] private float placeDistance = 6f;
 
     [Header("Preview Smoothing")]
-    [SerializeField] private float previewLerpSpeed = 18f;
+    [Tooltip("How quickly the preview moves to the new cell. Higher = snappier, lower = floatier.")]
+    [SerializeField] private float previewPosLerpSpeed = 18f;
+
+    [Header("Rotation Smoothing")]
+    [Tooltip("How quickly the preview rotates to the new rotation. Higher = snappier, lower = floatier.")]
+    [SerializeField] private float previewRotLerpSpeed = 22f;
+
+    private Quaternion previewRot;
+    private bool previewRotInitialized;
 
     [Header("Placement Rules")]
     [SerializeField] private bool requireSupportBelow = true;
+
+    [Header("Rotation")]
+    [SerializeField] private bool enableRotation = true;
+
+    // 0..3 clockwise steps (0, 90R, 180, 270R)
+    private int rotStepsCW = 0;
 
     // Active suitcase (real instance)
     private SuitcaseItem activeSuitcase;
@@ -61,12 +83,18 @@ public class SuitcasePlacer : MonoBehaviour
     {
         controls.Enable();
         controls.Player.Attack.started += OnAttackStarted;
+        controls.Player.RotateLeft.started += OnRotateLeft;
+        controls.Player.Interact.started += OnRotateRight;
     }
 
     private void OnDisable()
     {
         if (controls != null)
+        {
             controls.Player.Attack.started -= OnAttackStarted;
+            controls.Player.RotateLeft.started -= OnRotateLeft;
+            controls.Player.Interact.started -= OnRotateRight;
+        }
 
         controls.Disable();
     }
@@ -88,6 +116,37 @@ public class SuitcasePlacer : MonoBehaviour
         }
 
         TryPlace();
+    }
+
+    private void OnRotateLeft(InputAction.CallbackContext ctx)
+    {
+        if (!enableRotation) return;
+        if (activeSuitcase == null) return;
+
+        rotStepsCW = (rotStepsCW + 3) % 4; // -1 mod 4
+        RefreshPlacementAfterRotate();
+    }
+
+    private void OnRotateRight(InputAction.CallbackContext ctx)
+    {
+        if (!enableRotation) return;
+        if (activeSuitcase == null) return;
+
+        rotStepsCW = (rotStepsCW + 1) % 4;
+        RefreshPlacementAfterRotate();
+    }
+
+    private void RefreshPlacementAfterRotate()
+    {
+        // Re-evaluate validity immediately
+        if (hasLastCell)
+            canPlaceHere = ComputeCanPlaceAt(lastCell);
+
+        // Re-init rotation smoothing so it eases to the new target cleanly
+        previewRotInitialized = false;
+
+        if (autoCheckNoValidMoves)
+            CheckNoValidMovesAndShowUI();
     }
 
     // =========================
@@ -141,11 +200,17 @@ public class SuitcasePlacer : MonoBehaviour
 
     private void OnSelectedSuitcase()
     {
+        rotStepsCW = 0;
         hasLastCell = false;
+
         previewPosInitialized = false;
+        previewRotInitialized = false;
 
         UpdateHoverCell_Node_Sticky_NoBonk();
         UpdatePreviewVisual_StickyLerped();
+
+        if (autoCheckNoValidMoves)
+            CheckNoValidMovesAndShowUI();
     }
 
     private SuitcaseItem FindClosestSuitcase(Vector3 samplePoint)
@@ -169,7 +234,7 @@ public class SuitcasePlacer : MonoBehaviour
             if (c == null) continue;
 
             SuitcaseItem item = c.GetComponentInParent<SuitcaseItem>();
-            if (item == null || !item.enabled) continue; // ✅ ignore placed/disabled
+            if (item == null || !item.enabled) continue;
 
             float sqr = (item.transform.position - samplePoint).sqrMagnitude;
             if (sqr < bestSqr)
@@ -264,7 +329,7 @@ public class SuitcasePlacer : MonoBehaviour
     {
         if (bayGrid == null || activeSuitcase == null) return false;
 
-        Vector3Int[] cells = activeSuitcase.GetShapeCells();
+        Vector3Int[] cells = activeSuitcase.GetShapeCells(rotStepsCW);
 
         // 1) Fit + no overlap
         if (!bayGrid.CanPlace(cells, originCell))
@@ -309,19 +374,30 @@ public class SuitcasePlacer : MonoBehaviour
         if (!hasLastCell) return;
 
         Vector3 targetPos = bayGrid.CellToWorldCenter(lastCell);
-        Quaternion targetRot = Quaternion.identity;
 
+        // logical target rotation
+        Quaternion targetRot = Quaternion.Euler(0f, rotStepsCW * 90f, 0f);
+
+        // Init lerp states once
         if (!previewPosInitialized)
         {
             previewPos = targetPos;
             previewPosInitialized = true;
         }
+        if (!previewRotInitialized)
+        {
+            previewRot = targetRot;
+            previewRotInitialized = true;
+        }
 
-        float t = 1f - Mathf.Exp(-previewLerpSpeed * Time.deltaTime);
-        previewPos = Vector3.Lerp(previewPos, targetPos, t);
+        // Exponential smoothing (framerate independent)
+        float tp = 1f - Mathf.Exp(-previewPosLerpSpeed * Time.deltaTime);
+        float tr = 1f - Mathf.Exp(-previewRotLerpSpeed * Time.deltaTime);
 
-        // Still using the preview helper on SuitcaseItem
-        activeSuitcase.SetPreviewPose(previewPos, targetRot);
+        previewPos = Vector3.Lerp(previewPos, targetPos, tp);
+        previewRot = Quaternion.Slerp(previewRot, targetRot, tr);
+
+        activeSuitcase.SetPreviewPose(previewPos, previewRot);
         activeSuitcase.UpdatePreviewMaterial(canPlaceHere);
     }
 
@@ -334,22 +410,129 @@ public class SuitcasePlacer : MonoBehaviour
         if (!hasLastCell || !canPlaceHere) return;
         if (bayGrid == null) return;
 
-        Vector3Int[] cells = activeSuitcase.GetShapeCells();
+        Vector3Int[] cells = activeSuitcase.GetShapeCells(rotStepsCW);
 
         bool placed = bayGrid.Place(cells, lastCell);
         if (!placed) return;
 
         Vector3 finalPos = bayGrid.CellToWorldCenter(lastCell);
-        Quaternion finalRot = Quaternion.identity;
+        Quaternion finalRot = Quaternion.Euler(0f, rotStepsCW * 90f, 0f);
 
         activeSuitcase.CommitPlaced_MoveReal_DeletePreview(finalPos, finalRot, bayGrid.transform);
 
+        // lock this suitcase forever
         activeSuitcase.enabled = false;
+
+        if (winLose != null)
+            winLose.NotifySuitcasePlaced();
 
         activeSuitcase = null;
         hasLastCell = false;
         canPlaceHere = false;
         previewPosInitialized = false;
+        previewRotInitialized = false;
+    }
+
+    // =========================
+    // No Valid Moves scan
+    // =========================
+    public void CheckNoValidMovesAndShowUI()
+    {
+        if (!HasAnyValidPlacementAllRotations())
+            OnNoValidMove?.Invoke();
+    }
+
+    private bool HasAnyValidPlacementAllRotations()
+    {
+        if (activeSuitcase == null) return true;
+
+        for (int r = 0; r < 4; r++)
+        {
+            var cells = activeSuitcase.GetShapeCells(r);
+            if (HasAnyValidPlacementForRotation(cells))
+                return true;
+        }
+        return false;
+    }
+
+    private bool HasAnyValidPlacementForRotation(Vector3Int[] cells)
+    {
+        if (bayGrid == null || cells == null || cells.Length == 0)
+            return false;
+
+        // Compute bounds in local offsets (supports negative offsets; no rebasing required)
+        int minX = int.MaxValue, minY = int.MaxValue, minZ = int.MaxValue;
+        int maxX = int.MinValue, maxY = int.MinValue, maxZ = int.MinValue;
+
+        for (int i = 0; i < cells.Length; i++)
+        {
+            var c = cells[i];
+            if (c.x < minX) minX = c.x;
+            if (c.y < minY) minY = c.y;
+            if (c.z < minZ) minZ = c.z;
+
+            if (c.x > maxX) maxX = c.x;
+            if (c.y > maxY) maxY = c.y;
+            if (c.z > maxZ) maxZ = c.z;
+        }
+
+        int startX = -minX;
+        int endX = (bayGrid.width - 1) - maxX;
+
+        int startY = -minY;
+        int endY = (bayGrid.height - 1) - maxY;
+
+        int startZ = -minZ;
+        int endZ = (bayGrid.depth - 1) - maxZ;
+
+        if (startX > endX || startY > endY || startZ > endZ)
+            return false;
+
+        for (int x = startX; x <= endX; x++)
+            for (int y = startY; y <= endY; y++)
+                for (int z = startZ; z <= endZ; z++)
+                {
+                    if (ComputeCanPlaceAt_WithCells(new Vector3Int(x, y, z), cells))
+                        return true;
+                }
+
+        return false;
+    }
+
+    private bool ComputeCanPlaceAt_WithCells(Vector3Int originCell, Vector3Int[] cells)
+    {
+        if (bayGrid == null || cells == null || cells.Length == 0)
+            return false;
+
+        if (!bayGrid.CanPlace(cells, originCell))
+            return false;
+
+        if (requireSupportBelow)
+        {
+            for (int i = 0; i < cells.Length; i++)
+            {
+                Vector3Int c = originCell + cells[i];
+                Vector3Int below = c + Vector3Int.down;
+
+                bool hasPieceBelow = false;
+                for (int j = 0; j < cells.Length; j++)
+                {
+                    if (originCell + cells[j] == below)
+                    {
+                        hasPieceBelow = true;
+                        break;
+                    }
+                }
+                if (hasPieceBelow) continue;
+
+                if (c.y == 0) continue;
+
+                if (!bayGrid.InBounds(below)) return false;
+                if (!bayGrid.IsOccupied(below)) return false;
+            }
+        }
+
+        return true;
     }
 
 #if UNITY_EDITOR

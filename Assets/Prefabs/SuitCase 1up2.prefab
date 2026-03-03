@@ -87,7 +87,7 @@ MonoBehaviour:
   - {fileID: 3467640471994312998}
   previewValidMat: {fileID: 2100000, guid: 811a5a25c64d8964aa2b1125ffcccaba, type: 2}
   previewInvalidMat: {fileID: 2100000, guid: a853b046597579e409e49940395c4094, type: 2}
-  placedMat: {fileID: 2100000, guid: c5491f7f04a83174a89a88202556d5d6, type: 2}
+  placedMat: {fileID: 2100000, guid: 466c33d89582bda44aa24dd5774f6c28, type: 2}
   usePreviewClone: 1
 --- !u!114 &459522661552312841
 MonoBehaviour:

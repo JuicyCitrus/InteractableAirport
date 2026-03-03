@@ -74,7 +74,7 @@ public class SuitcaseItem : MonoBehaviour
 
             previewRends = previewInstance.GetComponentsInChildren<Renderer>(true);
 
-            foreach(MeshRenderer r in previewRends)
+            foreach (MeshRenderer r in previewRends)
             {
                 r.enabled = true;
             }
@@ -209,5 +209,12 @@ public class SuitcaseItem : MonoBehaviour
     {
         var shape = GetComponent<SuitcaseShape>();
         return shape != null ? shape.Cells : new[] { Vector3Int.zero };
+    }
+
+    public Vector3Int[] GetShapeCells(int rotStepsCW)
+    {
+        var shape = GetComponent<SuitcaseShape>();
+        if (shape == null) return new[] { Vector3Int.zero };
+        return shape.GetCellsForRotation(rotStepsCW);
     }
 }
