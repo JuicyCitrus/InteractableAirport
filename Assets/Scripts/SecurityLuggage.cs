@@ -7,6 +7,7 @@ public class SecurityLuggage : MonoBehaviour
     [Header("Luggage Info")]
     public Sprite xRayImage;
     public bool hasContraband;
+    public int luggageID;
 
     [Header("State")]
     public bool markedAsContraband = false;
