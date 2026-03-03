@@ -44155,6 +44155,8 @@ MonoBehaviour:
     isContraband: 0
   - image: {fileID: 1810301198, guid: 9bde34e4ed7de254da94a3c7a205f5f8, type: 3}
     isContraband: 1
+  - image: {fileID: 1810301198, guid: 9bde34e4ed7de254da94a3c7a205f5f8, type: 3}
+    isContraband: 1
   spawnPosition: {x: -11.5, y: 1.76, z: 5.5}
   luggagesSpawned: 0
 --- !u!1 &1421414504

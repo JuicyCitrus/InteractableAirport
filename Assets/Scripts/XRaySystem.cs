@@ -9,8 +9,6 @@ public class XRaySystem : MonoBehaviour
     
     [Header("Image Spawning")]
     public Canvas xRayScreen;
-    public float imageMinimumSize = 0.1f;
-    public float imageMaximumSize = 0.5f;
     public float xPositionRange = 0.5f;
     public float yPositionRange = 0.5f;
 
@@ -44,7 +42,7 @@ public class XRaySystem : MonoBehaviour
             // Set the image component's sprite to be the current luggage's x-ray image
             imageComponent.sprite = currentLuggage.xRayImages[i].image;
 
-            // Set the image's position, rotation and size on the canvas
+            // Set the image's position, and rotation on the canvas
             float randomX = Random.Range(-xPositionRange, xPositionRange);
             float randomY = Random.Range(-yPositionRange, yPositionRange);
             rectTransform.localPosition = new Vector3(randomX, randomY, 0);
@@ -52,8 +50,7 @@ public class XRaySystem : MonoBehaviour
             float randomRotation = Random.Range(0f, 360f);
             rectTransform.localRotation = Quaternion.Euler(0, 0, randomRotation);
 
-            float randomSize = Random.Range(imageMinimumSize, imageMaximumSize);
-            rectTransform.sizeDelta = new Vector2(randomSize, randomSize);
+            rectTransform.sizeDelta = new Vector2(currentLuggage.xRayImages[i].image.rect.size.x, currentLuggage.xRayImages[i].image.rect.size.y) * currentLuggage.xRayImages[i].spriteResizeMultiplier;
         }
     }
 

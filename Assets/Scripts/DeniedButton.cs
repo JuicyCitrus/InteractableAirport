@@ -8,7 +8,7 @@ public class DeniedButton : WorldSpaceButton
         if (XRaySystem.Instance.currentLuggage == null)
             return;
 
-        base.Push();
+        // base.Push();
 
         // Move the bag along the conveyor belt again and mark it as contraband
         XRaySystem.Instance.currentLuggage.ContinueMoving();

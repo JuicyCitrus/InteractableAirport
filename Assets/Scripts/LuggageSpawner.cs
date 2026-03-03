@@ -5,6 +5,7 @@ using UnityEngine;
 public class XRayImage
 {
     public Sprite image;
+    public float spriteResizeMultiplier;
     public bool isContraband;
 }
 
@@ -14,8 +15,6 @@ public class LuggageSpawner : MonoBehaviour
 
     public List<GameObject> luggagePrefabs = new List<GameObject>();
     public List<XRayImage> xRayImages = new List<XRayImage>();
-
-    public Vector3 spawnPosition;
 
     public int luggagesSpawned = 0;
 
@@ -48,7 +47,7 @@ public class LuggageSpawner : MonoBehaviour
         int randomIndex = Random.Range(0, luggagePrefabs.Count);
 
         // Spawn it at the spawn position
-        GameObject luggage = Instantiate(luggagePrefabs[randomIndex], spawnPosition, this.transform.rotation);
+        GameObject luggage = Instantiate(luggagePrefabs[randomIndex], transform.position, this.transform.rotation);
         SecurityLuggage securityLuggage = luggage.GetComponent<SecurityLuggage>();
         luggagesSpawned++;
         securityLuggage.luggageID = luggagesSpawned;

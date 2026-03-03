@@ -11,7 +11,7 @@ public class ApprovedButton : WorldSpaceButton
             return;
         }
 
-        base.Push();
+        // base.Push();
 
         // Move the bag along the conveyor belt again
         XRaySystem.Instance.currentLuggage.ContinueMoving();
