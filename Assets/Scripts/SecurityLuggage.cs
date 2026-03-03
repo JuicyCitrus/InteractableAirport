@@ -16,6 +16,7 @@ public class SecurityLuggage : MonoBehaviour
     [Header("Movement")]
     public Rigidbody rb;
     public float movementSpeed = 5f;
+    public float distanceForSecondMove = 10;
 
     private void OnEnable()
     {
