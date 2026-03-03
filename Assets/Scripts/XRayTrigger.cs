@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.UI;
 
 public class XRayTrigger : MonoBehaviour
 {
@@ -8,8 +9,8 @@ public class XRayTrigger : MonoBehaviour
         {
             luggage.isInXRayMachine = true;
             XRaySystem.Instance.currentLuggage = luggage;
-            XRaySystem.Instance.UpdateXRayImage(luggage.xRayImage);
             luggage.StopAllCoroutines();
+            XRaySystem.Instance.SpawnImagesOnUI();
         }
     }
 }

@@ -1,13 +1,14 @@
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class SecurityLuggage : MonoBehaviour
 {
     [Header("Luggage Info")]
-    public Sprite xRayImage;
     public bool hasContraband;
     public int luggageID;
+    public List<XRayImage> xRayImages = new List<XRayImage>();
 
     [Header("State")]
     public bool markedAsContraband = false;

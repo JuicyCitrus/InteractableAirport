@@ -8,8 +8,8 @@ public class InteractionManager : MonoBehaviour
     public float interactionRange;
     public Transform itemHoldArea;
 
-    private WorldSpaceButton currentButton;
-    private GameObject heldItem;
+    public WorldSpaceButton currentButton;
+    public GameObject heldItem;
     private Controls controls;
 
     private void Awake()

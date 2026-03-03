@@ -17,7 +17,9 @@ public class WorldSpaceButton : MonoBehaviour
 
     public virtual void Push()
     {
-        if(isPushing) 
+        Debug.Log("Button pushed!");
+
+        if (isPushing) 
             return;
 
         StartCoroutine(PushCoroutine());

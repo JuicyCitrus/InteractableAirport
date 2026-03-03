@@ -6,7 +6,10 @@ public class ApprovedButton : WorldSpaceButton
     {
         // Do not allow pushing if nothing is in the x-ray machine
         if (XRaySystem.Instance.currentLuggage == null)
+        {
+            Debug.Log("No luggage in x-ray machine!");
             return;
+        }
 
         base.Push();
 
