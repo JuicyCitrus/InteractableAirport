@@ -16,6 +16,9 @@ public class LuggageSpawner : MonoBehaviour
     public List<GameObject> luggagePrefabs = new List<GameObject>();
     public List<XRayImage> xRayImages = new List<XRayImage>();
 
+    [Header("Bag Details")]
+    public int numberOfItemsPerBag = 6;
+
     public int luggagesSpawned = 0;
 
     private void Awake()
@@ -30,18 +33,8 @@ public class LuggageSpawner : MonoBehaviour
         }
     }
 
-    private void Start()
-    {
-        SpawnLuggage();
-    }
-
     public void SpawnLuggage()
     {
-        // Don't spawn anymore luggage once the per round limit has been reached
-        if(luggagesSpawned >= SecurityScoring.Instance.luggageInRound)
-        {
-            return;
-        }
 
         // Choose a rabndom luggage prefab from the list
         int randomIndex = Random.Range(0, luggagePrefabs.Count);
@@ -53,7 +46,7 @@ public class LuggageSpawner : MonoBehaviour
         securityLuggage.luggageID = luggagesSpawned;
 
         // Populate its x-ray image list with random x-ray images from the spawner
-        for (int i = 0; i < 3; i++)
+        for (int i = 0; i < numberOfItemsPerBag; i++)
         {
             int randomImageIndex = Random.Range(0, xRayImages.Count);
             securityLuggage.xRayImages.Add(xRayImages[randomImageIndex]);

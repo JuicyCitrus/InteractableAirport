@@ -1,31 +1,45 @@
 using System.Collections;
 using UnityEngine;
-using UnityEngine.UIElements;
+using UnityEngine.UI;
 
 public class WorldSpaceButton : MonoBehaviour
 {
-    public Vector3 pushedPosition;
-    public float pushDuration = 0.2f;
+    public Image thisButton;
+    public Color defaultColor;
+    public Color selectedColor;
+    // public Vector3 pushedPosition;
+    // public float pushDuration = 0.2f;
 
-    private Vector3 originalPosition;
-    private bool isPushing = false;
+    // private Vector3 originalPosition;
+    // private bool isPushing = false;
 
     private void Start()
     {
-        originalPosition = transform.localPosition;
+        // originalPosition = transform.localPosition;
     }
 
     public virtual void Push()
     {
-        Debug.Log("Button pushed!");
 
-        if (isPushing) 
-            return;
+        // if (isPushing) 
+            // return;
 
-        StartCoroutine(PushCoroutine());
+        // StartCoroutine(PushCoroutine());
     }
 
-    private IEnumerator PushCoroutine()
+    public void Update()
+    {
+        if (InteractionManager.Instance.currentButton == this)
+        {
+            thisButton.color = selectedColor;
+        }
+        else
+        {
+            thisButton.color = defaultColor;
+        }
+    }
+
+    /* private IEnumerator PushCoroutine()
     {
         isPushing = true;
         float elapsedTime = 0f;
@@ -47,5 +61,5 @@ public class WorldSpaceButton : MonoBehaviour
         }
 
         isPushing = false;
-    }
+    } */
 }

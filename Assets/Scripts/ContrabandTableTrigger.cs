@@ -32,14 +32,10 @@ public class ContrabandTableTrigger : MonoBehaviour
             }
 
             luggagesOnTable.Add(luggage.luggageID, true);
-            SecurityScoring.Instance.luggagesCleared++;
-            Debug.Log(SecurityScoring.Instance.luggagesCleared);
-        }
 
-        // End round if it's the last bag
-        if (SecurityScoring.Instance.luggagesCleared >= SecurityScoring.Instance.luggageInRound)
-        {
-            SecurityScoring.Instance.RoundOver();
+            SecurityScoring.Instance.successfulIdentifications++;
+
+            Debug.Log(SecurityScoring.Instance.luggagesCleared);
         }
     }
 }

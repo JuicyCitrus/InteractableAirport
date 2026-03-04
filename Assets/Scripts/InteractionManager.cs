@@ -3,6 +3,8 @@ using UnityEngine.InputSystem;
 
 public class InteractionManager : MonoBehaviour
 {
+    public static InteractionManager Instance { get; private set; }
+
     [Header("Interaction")]
     public Transform raycastOrigin;
     public float interactionRange;
@@ -14,6 +16,15 @@ public class InteractionManager : MonoBehaviour
 
     private void Awake()
     {
+        if (Instance != null && Instance != this)
+        {
+            Destroy(gameObject);
+        }
+        else
+        {
+            Instance = this;
+        }
+
         controls = new Controls();
     }
 
@@ -56,7 +67,7 @@ public class InteractionManager : MonoBehaviour
                 {
                     currentButton = button;
                 }
-                if (controls.Player.Interact.WasPressedThisFrame())
+                if (controls.Player.Attack.WasPressedThisFrame())
                 {
                     currentButton.Push();
                 }
@@ -64,7 +75,7 @@ public class InteractionManager : MonoBehaviour
             // Luggage Interaction
             else if (hit.transform.TryGetComponent<SecurityLuggage>(out SecurityLuggage luggage))
             {
-                if (controls.Player.Interact.WasPressedThisFrame() && luggage.markedAsContraband)
+                if (controls.Player.Attack.WasPressedThisFrame() && luggage.markedAsContraband)
                 {
                     luggage.gameObject.transform.SetParent(itemHoldArea);
                     luggage.gameObject.transform.localPosition = Vector3.zero;

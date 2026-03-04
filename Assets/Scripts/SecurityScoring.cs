@@ -6,7 +6,6 @@ public class SecurityScoring : MonoBehaviour
     public static SecurityScoring Instance { get; private set; }
 
     [Header("Scoring Settings")]
-    public int luggageInRound = 10;
     public int luggagesCleared = 0;
     public int successfulIdentifications;
     public int failedIdentifications;

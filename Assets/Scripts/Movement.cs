@@ -35,6 +35,7 @@ public class Movement : MonoBehaviour
     {
         HandleMouseLook();
         HandleMovement();
+        ApplyGravity();
     }
 
     private void HandleMouseLook()
@@ -58,5 +59,13 @@ public class Movement : MonoBehaviour
 
         Vector3 move = transform.right * x + transform.forward * z;
         controller.Move(move * moveSpeed * Time.deltaTime);
+    }
+
+    private void ApplyGravity()
+    {
+        if(!controller.isGrounded)
+        {
+            controller.Move(Physics.gravity * Time.deltaTime);
+        }
     }
 }

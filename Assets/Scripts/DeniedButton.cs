@@ -14,16 +14,6 @@ public class DeniedButton : WorldSpaceButton
         XRaySystem.Instance.currentLuggage.ContinueMoving();
         XRaySystem.Instance.currentLuggage.markedAsContraband = true;
 
-        // Score based on whether or not the luggage had contraband
-        if (XRaySystem.Instance.currentLuggage.hasContraband)
-        {
-            SecurityScoring.Instance.successfulIdentifications++;
-        }
-        else
-        {
-            SecurityScoring.Instance.failedIdentifications++;
-        }
-
         // Set the x-ray machine to be empty again
         XRaySystem.Instance.currentLuggage = null;
 
