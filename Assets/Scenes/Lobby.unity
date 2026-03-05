@@ -2064,7 +2064,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 357207394}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 1344c3c82d62a2a41a3576d8abb8e3ea, type: 3}
   m_Name: 
@@ -2095,13 +2095,13 @@ VideoPlayer:
   m_VideoClip: {fileID: 32900000, guid: 44121817abe77af4e8740a4daace9601, type: 3}
   m_TargetCameraAlpha: 1
   m_TargetCamera3DLayout: 0
-  m_TargetCamera: {fileID: 0}
+  m_TargetCamera: {fileID: 1129889541}
   m_TargetTexture: {fileID: 8400000, guid: 8dc03333b40e9ca41b45b9bd4de34825, type: 2}
   m_TimeReference: 0
   m_TargetMaterialRenderer: {fileID: 0}
   m_TargetMaterialProperty: <noninit>
-  m_RenderMode: 2
-  m_AspectRatio: 2
+  m_RenderMode: 1
+  m_AspectRatio: 5
   m_DataSource: 0
   m_TimeUpdateMode: 2
   m_PlaybackSpeed: 1
@@ -2116,7 +2116,7 @@ VideoPlayer:
   m_ControlledAudioTrackCount: 1
   m_PlayOnAwake: 1
   m_SkipOnDrop: 1
-  m_Looping: 0
+  m_Looping: 1
   m_WaitForFirstFrame: 1
   m_FrameReadyEventEnabled: 0
   m_VideoShaders: []
@@ -7139,17 +7139,15 @@ MonoBehaviour:
   xRayImages:
   - image: {fileID: 2134393158, guid: 2a5402440c89c8e4e9a189da1369331e, type: 3}
     spriteResizeMultiplier: 0.0002
-    isContraband: 0
   - image: {fileID: -960932779, guid: 84d79bf39b5791747b5c233f94bfce8b, type: 3}
     spriteResizeMultiplier: 0.0002
-    isContraband: 0
   - image: {fileID: 1534698433, guid: 95c50b4aedb1e4949a29943cae075b33, type: 3}
     spriteResizeMultiplier: 0.0002
-    isContraband: 1
   - image: {fileID: -299994462, guid: 9b37ddbfce6ae8b4d9df3984f0acbbbf, type: 3}
     spriteResizeMultiplier: 0.0002
-    isContraband: 1
+  contrabandXRayImages: []
   numberOfItemsPerBag: 6
+  contrabandChance: 0.3
   luggagesSpawned: 0
 --- !u!4 &1383800638
 Transform:
