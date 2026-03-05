@@ -12,8 +12,8 @@ EditorBuildSettings:
     path: Assets/Scenes/LuggagePacking.unity
     guid: 6842363ae0995f243abe8e921f3ee4d9
   - enabled: 1
-    path: Assets/Scenes/LuggageScan.unity
-    guid: ea548306261bffb48b84b3296c95c5e1
+    path: Assets/Scenes/LuggageScaneDecorated.unity
+    guid: 058a1a8e31024754ba286d191564676b
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}
   m_UseUCBPForAssetBundles: 0

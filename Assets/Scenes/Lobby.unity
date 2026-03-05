@@ -737,7 +737,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cc278e6541e5c9b4088636ec3fd52411, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SceneLoader
-  SceneName: LuggageScan
+  SceneName: LuggageScaneDecorated
 --- !u!1001 &124881851
 PrefabInstance:
   m_ObjectHideFlags: 0
