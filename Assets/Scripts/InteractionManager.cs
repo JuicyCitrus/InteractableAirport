@@ -52,12 +52,15 @@ public class InteractionManager : MonoBehaviour
         Ray ray = new Ray(raycastOrigin.position, raycastOrigin.transform.forward);
         RaycastHit hit;
         Debug.DrawRay(ray.origin, ray.direction * interactionRange, Color.red);
+        Debug.Log("Raycasting forward from " + ray.origin + " in direction " + ray.direction);
 
         // Interaction
         if (Physics.Raycast(ray, out hit, interactionRange))
         {
+            Debug.Log("Raycast hit: " + hit.collider.gameObject.name);
+
             // Cannot interact if holding an item
-            if(heldItem != null)
+            if (heldItem != null)
                 return;
 
             // Button Interaction

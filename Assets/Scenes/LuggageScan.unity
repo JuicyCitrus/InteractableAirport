@@ -14837,8 +14837,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::XRaySystem
   currentLuggage: {fileID: 0}
   xRayScreen: {fileID: 476824832}
-  imageMinimumSize: 0.1
-  imageMaximumSize: 0.5
   xPositionRange: 0.3
   yPositionRange: 0.2
 --- !u!1 &747245879
@@ -15565,8 +15563,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e77b5fcec7f9a034fa8a2d0adefffb6a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DeniedButton
-  pushedPosition: {x: 0, y: -0.20000008, z: -0.3000002}
-  pushDuration: 0.2
+  thisButton: {fileID: 0}
+  defaultColor: {r: 0, g: 0, b: 0, a: 0}
+  selectedColor: {r: 0, g: 0, b: 0, a: 0}
 --- !u!1 &769871161
 GameObject:
   m_ObjectHideFlags: 0
@@ -43269,8 +43268,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c16f246807fe78f43b825a0c645c2c92, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ApprovedButton
-  pushedPosition: {x: 0, y: 0.25000012, z: -0.3000002}
-  pushDuration: 0.2
+  thisButton: {fileID: 0}
+  defaultColor: {r: 0, g: 0, b: 0, a: 0}
+  selectedColor: {r: 0, g: 0, b: 0, a: 0}
 --- !u!1 &1353761139
 GameObject:
   m_ObjectHideFlags: 0
@@ -44150,14 +44150,16 @@ MonoBehaviour:
   - {fileID: 8542398684602391486, guid: 2e9242419223ce141877adbc56b2a2b3, type: 3}
   xRayImages:
   - image: {fileID: -4680237, guid: ba71a845a2be310499c64f396f3273d8, type: 3}
-    isContraband: 0
+    spriteResizeMultiplier: 0
   - image: {fileID: -2096940374, guid: 54f7da08f304e7849a496dd4688ca4c9, type: 3}
-    isContraband: 0
+    spriteResizeMultiplier: 0
   - image: {fileID: 1810301198, guid: 9bde34e4ed7de254da94a3c7a205f5f8, type: 3}
-    isContraband: 1
+    spriteResizeMultiplier: 0
   - image: {fileID: 1810301198, guid: 9bde34e4ed7de254da94a3c7a205f5f8, type: 3}
-    isContraband: 1
-  spawnPosition: {x: -11.5, y: 1.76, z: 5.5}
+    spriteResizeMultiplier: 0
+  contrabandXRayImages: []
+  numberOfItemsPerBag: 6
+  contrabandChance: 0.3
   luggagesSpawned: 0
 --- !u!1 &1421414504
 GameObject:
@@ -48596,7 +48598,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0d7bad4bf3ae3ed44b3266c01ed5d9c5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SecurityScoring
-  luggageInRound: 3
   luggagesCleared: 0
   successfulIdentifications: 0
   failedIdentifications: 0
