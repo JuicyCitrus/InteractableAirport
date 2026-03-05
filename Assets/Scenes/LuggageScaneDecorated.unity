@@ -12176,56 +12176,46 @@ MonoBehaviour:
   luggagePrefabs:
   - {fileID: 5698755430954372363, guid: 96c4705d6c6105e48b119b93ef60de67, type: 3}
   - {fileID: 8542398684602391486, guid: 2e9242419223ce141877adbc56b2a2b3, type: 3}
+  - {fileID: 8542398684602391486, guid: d99ebb6986f1add4c8f113b0df818c3c, type: 3}
+  - {fileID: 8542398684602391486, guid: c61efadf4133ce542af5e212ee5a6319, type: 3}
+  - {fileID: 8542398684602391486, guid: 7cf88e2701f7a7d4cbc9da1405261fe1, type: 3}
+  - {fileID: 8542398684602391486, guid: f5870a07c7f72514aab5be4996f31a71, type: 3}
   xRayImages:
   - image: {fileID: 2134393158, guid: 2a5402440c89c8e4e9a189da1369331e, type: 3}
     spriteResizeMultiplier: 0.0001
-    isContraband: 0
   - image: {fileID: -960932779, guid: 84d79bf39b5791747b5c233f94bfce8b, type: 3}
     spriteResizeMultiplier: 0.00012
-    isContraband: 0
-  - image: {fileID: 1534698433, guid: 95c50b4aedb1e4949a29943cae075b33, type: 3}
-    spriteResizeMultiplier: 0.0001
-    isContraband: 1
-  - image: {fileID: -203329533, guid: d76b4f70b26df3f4abe16f9fe58f7824, type: 3}
-    spriteResizeMultiplier: 0.0001
-    isContraband: 1
-  - image: {fileID: 312757325, guid: da800103123fc0f42879e97ace88d7a1, type: 3}
-    spriteResizeMultiplier: 0.0001
-    isContraband: 1
   - image: {fileID: 1018756586, guid: ee449f386b80d4546853e4ca58841fcc, type: 3}
     spriteResizeMultiplier: 0.0001
-    isContraband: 0
   - image: {fileID: -944141654, guid: 5f61357ced878554385a22c2f9ce1525, type: 3}
     spriteResizeMultiplier: 0.0001
-    isContraband: 0
   - image: {fileID: -1911605928, guid: 569f3b3442165bf408a88c5fd8364e02, type: 3}
     spriteResizeMultiplier: 0.0001
-    isContraband: 0
   - image: {fileID: 246799201, guid: 89dfb368dc2c7164a87f4a56cd1b8cf0, type: 3}
     spriteResizeMultiplier: 0.0001
-    isContraband: 0
   - image: {fileID: 942582942, guid: e1aa67439df74c64397ddddb4af92cd3, type: 3}
     spriteResizeMultiplier: 0.0001
-    isContraband: 0
   - image: {fileID: -841545209, guid: b1b15f82270054545995ef7e17cadde6, type: 3}
     spriteResizeMultiplier: 0.0001
-    isContraband: 0
   - image: {fileID: 2031763289, guid: b83ae906db381344ab422401a3b08825, type: 3}
     spriteResizeMultiplier: 0.0001
-    isContraband: 0
   - image: {fileID: 631679139, guid: d2e8cded011349a4bb93bb4d7252b838, type: 3}
     spriteResizeMultiplier: 0.00012
-    isContraband: 0
   - image: {fileID: 672717924, guid: e67275c8b7efd994b85b0537e4dc9742, type: 3}
     spriteResizeMultiplier: 0.00012
-    isContraband: 0
   - image: {fileID: 145044602, guid: 0a1fe21dbe9bf1641b6d40d7ff2f15af, type: 3}
     spriteResizeMultiplier: 0.0001
-    isContraband: 0
   - image: {fileID: 246799201, guid: 89dfb368dc2c7164a87f4a56cd1b8cf0, type: 3}
     spriteResizeMultiplier: 0.00015
-    isContraband: 0
+  contrabandXRayImages:
+  - image: {fileID: 1534698433, guid: 95c50b4aedb1e4949a29943cae075b33, type: 3}
+    spriteResizeMultiplier: 0.0001
+  - image: {fileID: -203329533, guid: d76b4f70b26df3f4abe16f9fe58f7824, type: 3}
+    spriteResizeMultiplier: 0.0001
+  - image: {fileID: 312757325, guid: da800103123fc0f42879e97ace88d7a1, type: 3}
+    spriteResizeMultiplier: 0
   numberOfItemsPerBag: 6
+  contrabandChance: 0.5
   luggagesSpawned: 0
 --- !u!4 &1695875438
 Transform:
@@ -15627,7 +15617,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 61fd6c60c30a26b4eac41b6e937abfff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Timer
-  timeInRound: 15
+  timeInRound: 60
   timeElapsed: 0
   timerText: {fileID: 1450103186}
 --- !u!1 &2125442896
