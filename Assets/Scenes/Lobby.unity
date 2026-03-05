@@ -131,7 +131,7 @@ GameObject:
   - component: {fileID: 1921690}
   - component: {fileID: 1921691}
   m_Layer: 5
-  m_Name: GameObject
+  m_Name: Menu
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -605,7 +605,7 @@ GameObject:
   - component: {fileID: 116206729}
   - component: {fileID: 116206732}
   m_Layer: 5
-  m_Name: Button_1
+  m_Name: LuggageScanning
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1335,7 +1335,7 @@ GameObject:
   - component: {fileID: 217524309}
   - component: {fileID: 217524308}
   m_Layer: 5
-  m_Name: Button_3
+  m_Name: Play Video
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2022,7 +2022,7 @@ GameObject:
   - component: {fileID: 357207399}
   - component: {fileID: 357207398}
   m_Layer: 5
-  m_Name: Image
+  m_Name: Video Player
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2092,7 +2092,7 @@ VideoPlayer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 357207394}
   m_Enabled: 1
-  m_VideoClip: {fileID: 32900000, guid: 44121817abe77af4e8740a4daace9601, type: 3}
+  m_VideoClip: {fileID: 32900000, guid: a93e15158132352459a6495cb5086ff2, type: 3}
   m_TargetCameraAlpha: 1
   m_TargetCamera3DLayout: 0
   m_TargetCamera: {fileID: 1129889541}
@@ -2635,7 +2635,7 @@ GameObject:
   - component: {fileID: 545735859}
   - component: {fileID: 545735862}
   m_Layer: 5
-  m_Name: Button_2
+  m_Name: Quit
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -7479,7 +7479,7 @@ GameObject:
   - component: {fileID: 1454191639}
   - component: {fileID: 1454191638}
   m_Layer: 5
-  m_Name: Image
+  m_Name: Title
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -8701,7 +8701,7 @@ GameObject:
   - component: {fileID: 1573796684}
   - component: {fileID: 1573796687}
   m_Layer: 5
-  m_Name: Button
+  m_Name: Luggage Packing
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
