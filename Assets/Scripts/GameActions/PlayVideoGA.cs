@@ -1,0 +1,20 @@
+using System;
+using UnityEngine;
+using UnityEngine.Video;
+[Serializable]
+public class PlayVideoGA : GameAction
+{
+    public bool bLoop;
+    public VideoPlayer vPlayer;
+    public VideoClip clip;
+    public PlayVideoGA()
+    {
+        actionName = "Plays video clip";
+    }
+    public override void Action()
+    {
+        vPlayer.clip = clip;
+        vPlayer.Play();
+        vPlayer.isLooping = bLoop;
+    }
+}
