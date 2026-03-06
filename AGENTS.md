@@ -1,8 +1,14 @@
 <!-- UNITY CODE ASSIST INSTRUCTIONS START -->
 - Project name: InteractableAirport
-- Unity version: Unity 6000.3.7f1
+- Unity version: Unity 6000.3.9f1
+- Active scene:
+  - Name: Lobby
+  - Tags:
+    - Untagged, Respawn, Finish, EditorOnly, MainCamera, Player, GameController, Luggage
+  - Layers:
+    - Default, TransparentFX, Ignore Raycast, Water, UI, Ground, Bay, Case
 - Active game object:
-  - Name: CargoGrid
+  - Name: Video Player
   - Tag: Untagged
-  - Layer: Default
+  - Layer: UI
 <!-- UNITY CODE ASSIST INSTRUCTIONS END -->

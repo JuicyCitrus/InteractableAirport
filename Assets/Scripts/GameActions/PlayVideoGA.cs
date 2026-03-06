@@ -5,6 +5,7 @@ using UnityEngine.Video;
 public class PlayVideoGA : GameAction
 {
     public bool bLoop;
+    public AudioSource aSource;
     public VideoPlayer vPlayer;
     public VideoClip clip;
     public PlayVideoGA()
@@ -13,8 +14,9 @@ public class PlayVideoGA : GameAction
     }
     public override void Action()
     {
+        vPlayer.EnableAudioTrack(0,true );
         vPlayer.clip = clip;
         vPlayer.Play();
-        vPlayer.isLooping = bLoop;
+        vPlayer.isLooping = bLoop;       
     }
 }
