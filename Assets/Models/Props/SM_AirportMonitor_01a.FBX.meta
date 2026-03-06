@@ -3,7 +3,17 @@ guid: 7b20956537b4646429c9905c60fecbe2
 ModelImporter:
   serializedVersion: 24200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: MI_AirlineMonitor_01a
+    second: {fileID: 2100000, guid: d0ace9c7ad4274d8b90c5e3d2fcf0192, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: MI_TerminalSeat_FIDS_04a
+    second: {fileID: 2100000, guid: 7630db85824584420ac887a2354083b7, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
