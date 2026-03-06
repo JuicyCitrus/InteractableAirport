@@ -129,6 +129,7 @@ GameObject:
   m_Component:
   - component: {fileID: 10379201}
   - component: {fileID: 10379200}
+  - component: {fileID: 10379202}
   m_Layer: 0
   m_Name: AutoLoader
   m_TagString: Untagged
@@ -174,6 +175,103 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!82 &10379202
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 10379199}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_Resource: {fileID: 8300000, guid: 7132c958671e9469f9e3059421610677, type: 3}
+  m_PlayOnAwake: 1
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 1
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1001 &17166314
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -11408,7 +11506,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 902838824}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: UIEventTrigger, Assembly-CSharp
+        m_MethodName: TriggerActions
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!222 &902838821
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -11432,6 +11542,19 @@ MonoBehaviour:
   thisButton: {fileID: 902838824}
   defaultColor: {r: 0, g: 0.78431374, b: 0.74509805, a: 0.5019608}
   selectedColor: {r: 0, g: 1, b: 0.95000005, a: 1}
+  actions:
+  - rid: 8063596313722224757
+  references:
+    version: 2
+    RefIds:
+    - rid: 8063596313722224757
+      type: {class: PlayOneShotGA, ns: , asm: Assembly-CSharp}
+      data:
+        actionName: Plays one shot audio
+        delay: 0
+        bAccessibility: 0
+        aClip: {fileID: 8300000, guid: 27a249011a391418ca34a515c4b6cbed, type: 3}
+        aSource: {fileID: 966605403}
 --- !u!114 &902838823
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11758,6 +11881,7 @@ GameObject:
   - component: {fileID: 966605401}
   - component: {fileID: 966605400}
   - component: {fileID: 966605399}
+  - component: {fileID: 966605403}
   m_Layer: 5
   m_Name: XRayButtons
   m_TagString: Untagged
@@ -11849,6 +11973,103 @@ RectTransform:
   m_AnchoredPosition: {x: 2.5008254, y: 1.5135026}
   m_SizeDelta: {x: 1.1, y: 0.55}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!82 &966605403
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 966605398}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_Resource: {fileID: 0}
+  m_PlayOnAwake: 0
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!43 &967126896
 Mesh:
   m_ObjectHideFlags: 0
@@ -18260,6 +18481,19 @@ MonoBehaviour:
   thisButton: {fileID: 1265890272}
   defaultColor: {r: 0.19215687, g: 0.78431374, b: 0, a: 0.5019608}
   selectedColor: {r: 0.24705882, g: 1, b: 0, a: 1}
+  actions:
+  - rid: 8063596313722224758
+  references:
+    version: 2
+    RefIds:
+    - rid: 8063596313722224758
+      type: {class: PlayOneShotGA, ns: , asm: Assembly-CSharp}
+      data:
+        actionName: Plays one shot audio
+        delay: 0
+        bAccessibility: 0
+        aClip: {fileID: 8300000, guid: 27c4008d54dc4469f86180c4a9526362, type: 3}
+        aSource: {fileID: 966605403}
 --- !u!65 &1265890270
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -19575,6 +19809,7 @@ GameObject:
   - component: {fileID: 1412265341}
   - component: {fileID: 1412265344}
   - component: {fileID: 1412265343}
+  - component: {fileID: 1412265345}
   m_Layer: 5
   m_Name: Deny
   m_TagString: Untagged
@@ -19670,6 +19905,19 @@ MonoBehaviour:
   thisButton: {fileID: 1412265344}
   defaultColor: {r: 0.7921569, g: 0.039215688, b: 0, a: 0.5019608}
   selectedColor: {r: 1, g: 0.047058824, b: 0, a: 1}
+  actions:
+  - rid: 8063596313722224759
+  references:
+    version: 2
+    RefIds:
+    - rid: 8063596313722224759
+      type: {class: PlayOneShotGA, ns: , asm: Assembly-CSharp}
+      data:
+        actionName: Plays one shot audio
+        delay: 0
+        bAccessibility: 0
+        aClip: {fileID: 8300000, guid: d2ce73d25d9634209bdfbc0172bddc8b, type: 3}
+        aSource: {fileID: 966605403}
 --- !u!65 &1412265342
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -19736,6 +19984,31 @@ MonoBehaviour:
   m_PixelsPerUnitMultiplier: 1
   borderWidth: 0
   falloffDistance: 0
+--- !u!114 &1412265345
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1412265336}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c29bf86c34906e842bd9b78851d63bd5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::UIEventTrigger
+  actions:
+  - rid: 8063596313722224753
+  references:
+    version: 2
+    RefIds:
+    - rid: 8063596313722224753
+      type: {class: PlayOneShotGA, ns: , asm: Assembly-CSharp}
+      data:
+        actionName: Plays one shot audio
+        delay: 0
+        bAccessibility: 0
+        aClip: {fileID: 8300000, guid: d2ce73d25d9634209bdfbc0172bddc8b, type: 3}
+        aSource: {fileID: 966605403}
 --- !u!1 &1422821458
 GameObject:
   m_ObjectHideFlags: 1
@@ -26956,7 +27229,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 61fd6c60c30a26b4eac41b6e937abfff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Timer
-  timeInRound: 60
+  timeInRound: 30
   timeElapsed: 0
   timerText: {fileID: 1450103186}
 --- !u!1 &2125442896

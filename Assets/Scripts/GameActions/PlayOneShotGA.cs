@@ -13,7 +13,7 @@ public class PlayOneShotGA : GameAction
     public override void Action()
     {
         if(bAccessibility && !GameMaster.bTextToSpeech) return;
-        
+        Debug.Log("REa");
         aSource.PlayOneShot(aClip);
     }
 }

@@ -4,6 +4,7 @@ public class ApprovedButton : WorldSpaceButton
 {
     public override void Push()
     {
+        base.Push();
         // Do not allow pushing if nothing is in the x-ray machine
         if (XRaySystem.Instance.currentLuggage == null)
         {

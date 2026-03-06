@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -7,6 +8,8 @@ public class WorldSpaceButton : MonoBehaviour
     public Image thisButton;
     public Color defaultColor;
     public Color selectedColor;
+    [SerializeReference, SubclassSelector]
+    public List<GameAction> actions;
     // public Vector3 pushedPosition;
     // public float pushDuration = 0.2f;
 
@@ -20,7 +23,8 @@ public class WorldSpaceButton : MonoBehaviour
 
     public virtual void Push()
     {
-
+        foreach(GameAction item in actions)
+            item.Action();
         // if (isPushing) 
             // return;
 

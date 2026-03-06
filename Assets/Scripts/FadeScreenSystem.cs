@@ -26,7 +26,6 @@ public class FadeScreenSystem : MonoBehaviour
     }
     private void FadeIn()
     {
-        Debug.Log("fade in");
         bFadeOut = false;
         if(bFading)
         {
